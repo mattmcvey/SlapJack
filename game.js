@@ -1,6 +1,8 @@
 class Game {
   constructor(player) {
-    this.player = player;
+    this.player1 = new Player();
+    this.player2 = new Player();
+    this.currentPlayer = this.player1
     this.deck = [];
     this.cards = [
       './assets/blue-01.png',
@@ -69,7 +71,13 @@ class Game {
     return this.deck;
   }
   deal() {
-
+    for(var i = 0; i < this.deck.length; i++){
+      if(i % 2 === 0){
+        this.player1.hand.push(this.deck[i])
+      } else {
+        this.player2.hand.push(this.deck[i])
+      }
+    }
   }
   dealToMiddle() {
 

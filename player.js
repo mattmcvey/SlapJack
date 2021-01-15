@@ -1,8 +1,8 @@
 class Player {
-  constructor(id, wins, hands) {
+  constructor(id, wins) {
+    this.hand = [];
     this.id = id;
     this.wins = wins;
-    this.hand = hand; 
   }
   playCard() {
 

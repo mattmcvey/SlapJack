@@ -1,3 +1,9 @@
 var game = new Game()
 
-console.log(game.shuffle(game.cards))
+
+window.addEventListener("load", dealAndShuffle)
+
+function dealAndShuffle() {
+  game.shuffle(game.cards);
+  game.deal();
+}
