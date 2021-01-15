@@ -73,14 +73,24 @@ class Game {
   deal() {
     for(var i = 0; i < this.deck.length; i++){
       if(i % 2 === 0){
-        this.player1.hand.push(this.deck[i])
+        this.player1.hand.push(this.deck[i]);
       } else {
-        this.player2.hand.push(this.deck[i])
+        this.player2.hand.push(this.deck[i]);
       }
     }
+    this.deck = [];
   }
   dealToMiddle() {
-
+    var firstCard;
+    if(this.currentPlayer === this.player1){
+      firstCard = this.player1.hand.shift();
+      this.deck.unshift(firstCard);
+      this.currentPlayer = this.player2;
+    } else {
+      firstCard = this.player2.hand.shift();
+      this.deck.unshift(firstCard);
+      this.currentPlayer = this.player1
+    }
   }
   slap() {
 
