@@ -2,7 +2,7 @@ class Game {
   constructor(player) {
     this.player1 = new Player();
     this.player2 = new Player();
-    this.currentPlayer = this.player1
+    this.currentPlayer = "player1"
     this.deck = [];
     this.cards = [
       './assets/blue-01.png',
@@ -59,10 +59,10 @@ class Game {
       './assets/red-queen.png'
     ]
   }
-  shuffle(cards) {
+  shuffle(cards, length) {
     var randomNumbers = [];
-    while(randomNumbers.length < 52){
-      var randomNumber = Math.floor(Math.random() * 52);
+    while(randomNumbers.length < length){
+      var randomNumber = Math.floor(Math.random() * length);
       if(randomNumbers.indexOf(randomNumber) === -1) randomNumbers.push(randomNumber);
     }
     for(var i = 0; i < randomNumbers.length; i++){
@@ -80,20 +80,10 @@ class Game {
     }
     this.deck = [];
   }
-  dealToMiddle() {
-    var firstCard;
-    if(this.currentPlayer === this.player1){
-      firstCard = this.player1.hand.shift();
-      this.deck.unshift(firstCard);
-      this.currentPlayer = this.player2;
-    } else {
-      firstCard = this.player2.hand.shift();
-      this.deck.unshift(firstCard);
-      this.currentPlayer = this.player1
-    }
-  }
   slap() {
-
+    var slappedCard = this.deck[0];
+    var split = slappedCard.split("-")
+    console.log(split)
   }
   winCount() {
 
