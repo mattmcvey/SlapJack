@@ -2,7 +2,6 @@ body {
   background: url(assets/wallpaperflare.com_wallpaper.jpg) no-repeat center center fixed;
   background-size: cover;
   margin: 0;
-  border: 1px solid red;
 }
 
 .decks {
@@ -27,4 +26,8 @@ body {
 .playerWins {
   margin-top: 20px;
   font-size: x-large;
+}
+
+.hidden {
+  display: none; 
 }
