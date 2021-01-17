@@ -4,6 +4,7 @@ class Game {
     this.player2 = new Player();
     this.currentPlayer = "player1"
     this.deck = [];
+    this.deckType = "centerDeck";
     this.cards = [
       './assets/blue-01.png',
       './assets/blue-02.png',
@@ -61,14 +62,22 @@ class Game {
   }
   shuffle(cards, length) {
     var randomNumbers = [];
+    var tempDeck = [];
     while(randomNumbers.length < length){
       var randomNumber = Math.floor(Math.random() * length);
       if(randomNumbers.indexOf(randomNumber) === -1) randomNumbers.push(randomNumber);
     }
     for(var i = 0; i < randomNumbers.length; i++){
-      this.deck.push(cards[randomNumbers[i]]);
+      if(this.deckType === "centerDeck"){
+        this.deck.push(cards[randomNumbers[i]]);
+      } else if (this.deckType === "player1Deck") {
+        tempDeck.push(cards[randomNumbers[i]]);
+        this.player1.hand = tempDeck;
+      } else {
+        tempDeck.push(cards[randomNumbers[i]])
+        this.player2.hand = tempDeck;
+      }
     }
-    return this.deck;
   }
   deal() {
     for(var i = 0; i < this.deck.length; i++){
@@ -82,8 +91,42 @@ class Game {
   }
   slap() {
     var slappedCard = this.deck[0];
-    var split = slappedCard.split("-")
-    console.log(split)
+    var currentCardDashSplit = slappedCard.split("-");
+    var currentCardPeriodSplit = currentCardDashSplit[1].split(".");
+    var previousCard = this.deck[1];
+    var previousCardDashSplit = previousCard.split("-");
+    var previousCardPeroidSplit = previousCardDashSplit[1].split(".")
+    if(currentCardDashSplit[1] === "jack.png" && event.key === "f"){
+      for(var i = 0; i < this.deck.length; i++){
+        this.player1.hand.push(this.deck[i])
+      }
+      this.deck = [];
+      this.deckType = "player1Deck";
+      this.shuffle(this.player1.hand, this.player1.hand.length);
+    } else if(currentCardDashSplit[1] === "jack.png" && event.key === "j") {
+      for(var i = 0; i < this.deck.length; i++){
+        this.player2.hand.push(this.deck[i])
+      }
+      this.deck = [];
+      this.deckType = "player2Deck";
+      this.shuffle(this.player2.hand, this.player2.hand.length)
+    }
+
+    // else if(previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "f" && this.player1.hand.length && this.player2.hand.length) {
+    //   for(var i = 0; i < this.deck.length; i++){
+    //     this.player1.hand.push(this.deck[i])
+    //   }
+    //   this.deck = [];
+    //   this.deckType = "player1Deck";
+    //   this.shuffle(this.player1.hand, this.player1.hand.length)
+    // } else if(previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "j" && this.player1.hand.length && this.player2.hand.length){
+    //   for(var i = 0; i < this.deck.length; i++){
+    //     this.player2.hand.push(this.deck[i])
+    //   }
+    //   this.deck = [];
+    //   this.deckType = "player2Deck";
+    //   this.shuffle(this.player2.hand, this.player2.hand.length)
+    // }
   }
   winCount() {
 
