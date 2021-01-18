@@ -93,12 +93,16 @@ class Game {
     var slappedCard = this.deck[0];
     var currentCardDashSplit = slappedCard.split("-");
     var currentCardPeriodSplit = currentCardDashSplit[1].split(".");
-    var previousCard = this.deck[1];
-    var previousCardDashSplit = previousCard.split("-");
-    var previousCardPeroidSplit = previousCardDashSplit[1].split(".")
-    var thirdCard = this.deck[2];
-    var thirdCardDashSplit = thirdCard.split("-");
-    var thirdCardPeriodSplit = thirdCardDashSplit[1].split(".")
+    if(this.deck.length > 1) {
+      var previousCard = this.deck[1];
+      var previousCardDashSplit = previousCard.split("-");
+      var previousCardPeroidSplit = previousCardDashSplit[1].split(".")
+    }
+    if(this.deck.length > 2) {
+      var thirdCard = this.deck[2];
+      var thirdCardDashSplit = thirdCard.split("-");
+      var thirdCardPeriodSplit = thirdCardDashSplit[1].split(".")
+    }
     if(currentCardDashSplit[1] === "jack.png" && event.key === "f"){
       for(var i = 0; i < this.deck.length; i++){
         this.player1.hand.push(this.deck[i])
@@ -113,28 +117,28 @@ class Game {
       this.deck = [];
       this.deckType = "player2Deck";
       this.shuffle(this.player2.hand, this.player2.hand.length)
-    } else if(previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "f" && this.player1.hand.length && this.player2.hand.length) {
+    } else if(game.deck.length > 1 && previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "f" && this.player1.hand.length && this.player2.hand.length) {
       for(var i = 0; i < this.deck.length; i++){
         this.player1.hand.push(this.deck[i])
       }
       this.deck = [];
       this.deckType = "player1Deck";
       this.shuffle(this.player1.hand, this.player1.hand.length)
-    } else if(previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "j" && this.player1.hand.length && this.player2.hand.length){
+    } else if(game.deck.length > 1 && previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "j" && this.player1.hand.length && this.player2.hand.length){
       for(var i = 0; i < this.deck.length; i++){
         this.player2.hand.push(this.deck[i])
       }
       this.deck = [];
       this.deckType = "player2Deck";
       this.shuffle(this.player2.hand, this.player2.hand.length)
-    } else if (currentCardPeriodSplit[0] === thirdCardPeriodSplit[0] && event.key === "f" && this.player1.hand.length && this.player2.hand.length){
+    } else if (game.deck.length > 2 && currentCardPeriodSplit[0] === thirdCardPeriodSplit[0] && event.key === "f" && this.player1.hand.length && this.player2.hand.length){
       for(var i = 0; i < this.deck.length; i++){
         this.player1.hand.push(this.deck[i])
       }
       this.deck = [];
       this.deckType = "player1Deck";
       this.shuffle(this.player1.hand, this.player1.hand.length)
-    } else if (currentCardPeriodSplit[0] === thirdCardPeriodSplit[0] && event.key === "j" && this.player1.hand.length && this.player2.hand.length) {
+    } else if (game.deck.length > 2 &&currentCardPeriodSplit[0] === thirdCardPeriodSplit[0] && event.key === "j" && this.player1.hand.length && this.player2.hand.length) {
       for(var i = 0; i < this.deck.length; i++){
         this.player2.hand.push(this.deck[i])
       }
