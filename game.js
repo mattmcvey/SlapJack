@@ -141,6 +141,13 @@ class Game {
       this.deck = [];
       this.deckType = "player2Deck";
       this.shuffle(this.player2.hand, this.player2.hand.length)
+    } else if (event.key === "f") {
+      var forfietCard = this.player1.hand.shift()
+      this.player2.hand.push(forfietCard)
+      console.log(game.player2.hand)
+    } else if (event.key === "j") {
+      var forfietCard = this.player2.hand.shift()
+      this.player1.hand.push(forfietCard)
     }
   }
   winCount() {

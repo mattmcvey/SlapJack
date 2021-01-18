@@ -16,11 +16,13 @@ function addCardToCenterDeck(event) {
     var playedCard = game.player1.playCard();
     game.deck.unshift(playedCard)
     updateCardImage();
+    console.log(game.player1.hand)
   } else if(game.player2.hand.length && event.key === 'p' && game.currentPlayer === "player2"){
     game.currentPlayer = "player1";
     var playedCard = game.player2.playCard();
     game.deck.unshift(playedCard)
     updateCardImage();
+    console.log(game.player2.hand)
   } else if (event.key === "f" || event.key === "j"){
     game.slap();
   } else {
