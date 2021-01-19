@@ -9,7 +9,7 @@ class Player {
     return firstCard;
   }
   saveWinsToStorage() {
-    var stringified = JSON.stringify(this)
-    localStorage.setItem(this.id, stringified)
+    var stringified = JSON.stringify(this);
+    localStorage.setItem(this.id, stringified);
   }
 }
