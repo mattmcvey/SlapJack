@@ -94,7 +94,7 @@ class Game {
     this.deck = [];
   }
   slap() {
-    this.resetTheDeck()
+    this.declareWinner()
     if(this.deck.length > 0) {
       var slappedCard = this.deck[0];
       var currentCardDashSplit = slappedCard.split("-");
@@ -164,12 +164,12 @@ class Game {
       this.deck = [];
       this.deckType = "player2Deck";
       this.shuffle(this.player2.hand, this.player2.hand.length)
-    } else if (event.key === "f" && this.player2.hand.length) {
+    } else if (this.deck.length && event.key === "f") {
       this.slapType = "badSlap";
       this.slapper = "Player 1";
       var forfietCard = this.player1.hand.shift()
       this.player2.hand.push(forfietCard)
-    } else if (event.key === "j" && this.player1.hand.length) {
+    } else if (this.deck.length && event.key === "j") {
       this.slapType = "badSlap";
       this.slapper = "Player 2"
       var forfietCard = this.player2.hand.shift()
@@ -178,7 +178,7 @@ class Game {
       return;
     }
   }
-  resetTheDeck() {
+  declareWinner() {
     var slappedCard = this.deck[0];
     var cardType = slappedCard.split("-");
     if(!this.player1.hand.length && event.key === "j" && cardType[1] === "jack.png") {
@@ -189,6 +189,7 @@ class Game {
       this.player2.wins+=1;
       this.deckType = "centerDeck";
       this.slapType = "winner";
+      this.slapper = "Player 2"
       playerOneDeck.classList.remove("hidden");
       this.shuffle(this.deck, this.deck.length);
       this.deal();
@@ -200,11 +201,34 @@ class Game {
       this.player1.wins+=1;
       this.deckType = "centerDeck";
       this.slapType = "winner";
+      this.slapper = "Player 1"
       playerTwoDeck.classList.remove("hidden");
       this.shuffle(this.deck, this.deck.length);
       this.deal();
-    } else {
-
+    } else if (!this.player2.hand.length && event.key === "j" && cardType[1] !== "jack.png"){
+      for(var i = 0; i < this.player1.hand.length; i++) {
+        this.deck.push(this.player1.hand[i]);
+      }
+      this.player1.hand = [];
+      this.player1.wins+=1;
+      this.deckType = "centerDeck";
+      this.slapType = "badSlapLoser";
+      this.slapper = "Player 1"
+      playerTwoDeck.classList.remove("hidden");
+      this.shuffle(this.deck, this.deck.length);
+      this.deal();
+    } else if (!this.player1.hand.length && event.key === "f" && cardType[1] !== "jack.png") {
+      for(var i = 0; i < this.player2.hand.length; i++){
+        this.deck.push(this.player2.hand[i]);
+      }
+      this.player2.hand = [];
+      this.player2.wins+=1;
+      this.deckType = "centerDeck";
+      this.slapType = "badSlapLoser";
+      this.slapper = "Player 2"
+      playerOneDeck.classList.remove("hidden");
+      this.shuffle(this.deck, this.deck.length);
+      this.deal();
     }
   }
 }
