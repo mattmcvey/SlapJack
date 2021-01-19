@@ -1,7 +1,7 @@
 class Game {
   constructor(player) {
-    this.player1 = new Player();
-    this.player2 = new Player();
+    this.player1 = new Player(1);
+    this.player2 = new Player(2);
     this.currentPlayer = "player1"
     this.deck = [];
     this.currentDeck = [];
@@ -189,8 +189,9 @@ class Game {
       this.player2.wins+=1;
       this.deckType = "centerDeck";
       this.slapType = "winner";
-      this.slapper = "Player 2"
+      this.slapper = "Player 2";
       playerOneDeck.classList.remove("hidden");
+      this.player2.saveWinsToStorage();
       this.shuffle(this.deck, this.deck.length);
       this.deal();
     } else if (!this.player2.hand.length && event.key === "f" && cardType[1] === "jack.png") {
@@ -201,8 +202,9 @@ class Game {
       this.player1.wins+=1;
       this.deckType = "centerDeck";
       this.slapType = "winner";
-      this.slapper = "Player 1"
+      this.slapper = "Player 1";
       playerTwoDeck.classList.remove("hidden");
+      this.player1.saveWinsToStorage();
       this.shuffle(this.deck, this.deck.length);
       this.deal();
     } else if (!this.player2.hand.length && event.key === "j" && cardType[1] !== "jack.png"){
@@ -213,8 +215,9 @@ class Game {
       this.player1.wins+=1;
       this.deckType = "centerDeck";
       this.slapType = "badSlapLoser";
-      this.slapper = "Player 1"
+      this.slapper = "Player 1";
       playerTwoDeck.classList.remove("hidden");
+      this.player1.saveWinsToStorage();
       this.shuffle(this.deck, this.deck.length);
       this.deal();
     } else if (!this.player1.hand.length && event.key === "f" && cardType[1] !== "jack.png") {
@@ -225,8 +228,9 @@ class Game {
       this.player2.wins+=1;
       this.deckType = "centerDeck";
       this.slapType = "badSlapLoser";
-      this.slapper = "Player 2"
+      this.slapper = "Player 2";
       playerOneDeck.classList.remove("hidden");
+      this.player2.saveWinsToStorage()
       this.shuffle(this.deck, this.deck.length);
       this.deal();
     }
