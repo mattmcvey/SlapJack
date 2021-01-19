@@ -48,7 +48,7 @@ function addCardToCenterDeck(event) {
       playerTwoDeck.classList.remove("hidden");
     }
     game.slap();
-    game.resetTheDeck();
+    //game.resetTheDeck();
     slapMessage()
   } else {
     event.preventDefault(event)
@@ -64,7 +64,7 @@ function slapMessage() {
   if(game.slapType === "slapJack"){
     header.classList.remove("hidden")
     headerMessage.innerText = `SLAPJACK! ${game.slapper} takes the pile!`
-  }else if (game.slapType === "double") {
+  } else if (game.slapType === "double") {
     header.classList.remove("hidden")
     headerMessage.innerText = `DOUBLE! ${game.slapper} takes the pile!`
   } else if (game.slapType === "sandwich") {
