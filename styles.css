@@ -7,7 +7,12 @@ body {
 header {
   text-align: center;
   font-size: 40px;
+  margin: auto;
   margin-top: 5%;
+  background-color: #fff;
+  width: 800px;
+  border: 5px solid #00FF00;
+  border-radius: 10px;
 }
 
 .decks {
@@ -27,11 +32,28 @@ header {
 
 .wins-cards {
   text-align: center;
+
 }
 
 .playerWins {
   margin-top: 20px;
   font-size: x-large;
+  background-color: #fff;
+  border: 2px solid #00FF00;
+  border-radius: 10px;
+}
+
+.restart {
+  margin-right: 0;
+  font-size: large;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: 80%;
+  display: block;
+  height: 50px;
+  width:110px;
+  border: 2px solid #00FF00;
+  background-color: #fff;
 }
 
 .hidden {

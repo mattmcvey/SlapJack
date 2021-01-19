@@ -3,14 +3,26 @@ var centerDeck = document.getElementById("centerDeck");
 var centerDeckImage = document.getElementById("centerDeckImage");
 var playerOnedDeck = document.getElementById("playerTwoDeck");
 var playerTwoDeck = document.getElementById("playerTwoDeck");
-var headerMessage = document.getElementById("header")
+var headerMessage = document.getElementById("header");
+var restartButton = document.getElementById("restartButton");
 
 window.addEventListener("load", dealAndShuffle);
 window.addEventListener("keydown", addCardToCenterDeck);
+restartButton.addEventListener("click", restartGame);
 
 function dealAndShuffle() {
   game.shuffle(game.cards, 52);
   game.deal();
+  displayWinTotals();
+}
+
+function displayWinTotals() {
+  var player1Wins = JSON.parse(localStorage.getItem("1"));
+  var player2Wins = JSON.parse(localStorage.getItem("2"));
+  game.player1.wins+= player1Wins.wins;
+  game.player2.wins+= player2Wins.wins;
+  document.getElementById("playerOneWins").innerText = `${player1Wins.wins} WINS`;
+  document.getElementById("playerTwoWins").innerText = `${player2Wins.wins} WINS`;
 }
 
 function addCardToCenterDeck(event) {
@@ -80,4 +92,8 @@ function slapMessage() {
     header.classList.remove("hidden")
     headerMessage.innerText = `LOSER! Bad slap, ${game.slapper} wins the game!`
   }
+}
+
+function restartGame() {
+  location.reload()
 }
