@@ -4,6 +4,12 @@ body {
   margin: 0;
 }
 
+header {
+  text-align: center;
+  font-size: 40px;
+  margin-top: 5%;
+}
+
 .decks {
   display: flex;
   align-items: center;
@@ -16,7 +22,7 @@ body {
   background-color: #fff;
   border: 5px solid #00FF00;
   border-radius: 10px;
-  margin-top: 60%;
+  margin-top: 40%;
 }
 
 .wins-cards {
@@ -29,5 +35,5 @@ body {
 }
 
 .hidden {
-  display: none; 
+  display: none;
 }
