@@ -4,6 +4,7 @@ class Game {
     this.player2 = new Player();
     this.currentPlayer = "player1"
     this.deck = [];
+    this.currentDeck = [];
     this.deckType = "centerDeck";
     this.cards = [
       './assets/blue-01.png',
@@ -69,7 +70,8 @@ class Game {
     }
     for(var i = 0; i < randomNumbers.length; i++){
       if(this.deckType === "centerDeck"){
-        this.deck.push(cards[randomNumbers[i]]);
+        tempDeck.push(cards[randomNumbers[i]]);
+        this.deck = tempDeck;
       } else if (this.deckType === "player1Deck") {
         tempDeck.push(cards[randomNumbers[i]]);
         this.player1.hand = tempDeck;
@@ -103,17 +105,19 @@ class Game {
       var thirdCardDashSplit = thirdCard.split("-");
       var thirdCardPeriodSplit = thirdCardDashSplit[1].split(".")
     }
-    if(currentCardDashSplit[1] === "jack.png" && event.key === "f"){
+    if(currentCardDashSplit[1] === "jack.png" && event.key === "f" && this.player2.hand.length){
       for(var i = 0; i < this.deck.length; i++){
         this.player1.hand.push(this.deck[i])
       }
+      this.currentDeck = this.deck;
       this.deck = [];
       this.deckType = "player1Deck";
       this.shuffle(this.player1.hand, this.player1.hand.length);
-    } else if(currentCardDashSplit[1] === "jack.png" && event.key === "j") {
+    } else if(currentCardDashSplit[1] === "jack.png" && event.key === "j" && this.player1.hand.length) {
       for(var i = 0; i < this.deck.length; i++){
         this.player2.hand.push(this.deck[i])
       }
+      this.currentDeck = this.deck;
       this.deck = [];
       this.deckType = "player2Deck";
       this.shuffle(this.player2.hand, this.player2.hand.length)
@@ -121,6 +125,7 @@ class Game {
       for(var i = 0; i < this.deck.length; i++){
         this.player1.hand.push(this.deck[i])
       }
+      this.currentDeck = this.deck;
       this.deck = [];
       this.deckType = "player1Deck";
       this.shuffle(this.player1.hand, this.player1.hand.length)
@@ -128,6 +133,7 @@ class Game {
       for(var i = 0; i < this.deck.length; i++){
         this.player2.hand.push(this.deck[i])
       }
+      this.currentDeck = this.deck;
       this.deck = [];
       this.deckType = "player2Deck";
       this.shuffle(this.player2.hand, this.player2.hand.length)
@@ -135,6 +141,7 @@ class Game {
       for(var i = 0; i < this.deck.length; i++){
         this.player1.hand.push(this.deck[i])
       }
+      this.currentDeck = this.deck;
       this.deck = [];
       this.deckType = "player1Deck";
       this.shuffle(this.player1.hand, this.player1.hand.length)
@@ -142,22 +149,47 @@ class Game {
       for(var i = 0; i < this.deck.length; i++){
         this.player2.hand.push(this.deck[i])
       }
+      this.currentDeck = this.deck;
       this.deck = [];
       this.deckType = "player2Deck";
       this.shuffle(this.player2.hand, this.player2.hand.length)
-    } else if (event.key === "f") {
-      var forfietCard = this.player1.hand.shift()
-      this.player2.hand.push(forfietCard)
-      console.log(game.player2.hand)
-    } else if (event.key === "j") {
-      var forfietCard = this.player2.hand.shift()
-      this.player1.hand.push(forfietCard)
     }
-  }
-  winCount() {
-
+    // else if (event.key === "f") {
+    //   var forfietCard = this.player1.hand.shift()
+    //   this.player2.hand.push(forfietCard)
+    // } else if (event.key === "j") {
+    //   var forfietCard = this.player2.hand.shift()
+    //   this.player1.hand.push(forfietCard)
+    // }
   }
   resetTheDeck() {
-
+    console.log("here")
+    var slappedCard = this.currentDeck[0];
+    var cardType = slappedCard.split("-");
+    if(!this.player1.hand.length && event.key === "j" && cardType[1] === "jack.png") {
+      console.log("here")
+      location.reload()
+      // for(var i = 0; i < this.player2.hand.length; i++){
+      //   this.deck.push(this.player2.hand[i]);
+      // }
+      // this.player2.hand = [];
+      // this.player2.wins+=1;
+      // this.deckType = "centerDeck";
+      // playerOneDeck.classList.remove("hidden");
+      // this.shuffle(this.deck, this.deck.length);
+      // this.deal();
+    } else if (!this.player2.hand.length && event.key === "f" && cardType[1] === "jack.png") {
+      console.log("here")
+      location.reload()
+      // for(var i = 0; i < this.player1.hand.length; i++) {
+      //   this.deck.push(this.player1.hand[i]);
+      // }
+      // this.player1.hand = [];
+      // this.player1.wins+=1;
+      // this.deckType = "centerDeck";
+      // playerTwoDeck.classList.remove("hidden");
+      // this.shuffle(this.deck, this.deck.length);
+      // this.deal();
+    }
   }
 }

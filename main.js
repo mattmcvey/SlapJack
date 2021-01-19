@@ -32,12 +32,14 @@ function addCardToCenterDeck(event) {
       playerTwoDeck.classList.remove("hidden");
     }
     game.slap();
+    game.resetTheDeck();
   } else if(!game.player2.hand.length && event.key === "q"){
     game.currentPlayer = "player1"
     playerTwoDeck.classList.add("hidden")
     var playedCard = game.player1.playCard();
     game.deck.unshift(playedCard)
     updateCardImage();
+    console.log(game.player1.hand)
   } else if (!game.player1.hand.length && event.key === "p"){
     game.currentPlayer = "player2"
     playerOneDeck.classList.add("hidden")

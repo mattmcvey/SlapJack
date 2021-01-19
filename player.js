@@ -1,8 +1,8 @@
 class Player {
-  constructor(id, wins) {
+  constructor(id) {
     this.hand = [];
     this.id = id;
-    this.wins = wins;
+    this.wins = 0;
   }
   playCard() {
     var firstCard = this.hand.shift();
