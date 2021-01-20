@@ -1,6 +1,6 @@
 # SlapJack
 
-![Check it out!](https://giphy.com/gifs/MRA1NDafSUxdYoJfzY)
+![](https://giphy.com/gifs/MRA1NDafSUxdYoJfzY)
 
 ### View the page here:
 ********************************************************************************
