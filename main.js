@@ -85,10 +85,14 @@ function slapMessage() {
 function displayWinTotals() {
   var player1Wins = JSON.parse(localStorage.getItem("1"));
   var player2Wins = JSON.parse(localStorage.getItem("2"));
-  game.player1.wins+= player1Wins.wins;
-  game.player2.wins+= player2Wins.wins;
-  document.getElementById("playerOneWins").innerText = `${player1Wins.wins} WINS`;
-  document.getElementById("playerTwoWins").innerText = `${player2Wins.wins} WINS`;
+  if(localStorage.length && player1Wins){
+    game.player1.wins+= player1Wins.wins;
+    document.getElementById("playerOneWins").innerText = `${player1Wins.wins} WINS`;
+  }
+  if (localStorage.length && player2Wins){
+    game.player2.wins+= player2Wins.wins;
+    document.getElementById("playerTwoWins").innerText = `${player2Wins.wins} WINS`;
+  }
 }
 
 function restartGame() {
