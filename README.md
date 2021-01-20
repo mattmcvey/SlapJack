@@ -2,11 +2,6 @@
 
 ![Check it out!](https://giphy.com/gifs/MRA1NDafSUxdYoJfzY)
 
-### View the page here:
-********************************************************************************
-![SlapJack](file:///Users/matthewmcvey/turing/mod_1/SlapJack/index.html)
-
-
 ### A fun game to pass the time.
 ********************************************************************************
 SlapJack is a card game played between two players locally using one keyboard.
