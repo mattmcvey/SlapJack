@@ -1,6 +1,6 @@
 # SlapJack
 
-![Check it out!](https://giphy.com/gifs/MRA1NDafSUxdYoJfzY)
+![Check it out!](https://media.giphy.com/media/MRA1NDafSUxdYoJfzY/giphy.gif)
 
 ### A fun game to pass the time.
 ********************************************************************************
