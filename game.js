@@ -1,7 +1,7 @@
 class Game {
   constructor(player) {
-    this.player1 = new Player();
-    this.player2 = new Player();
+    this.player1 = new Player(1);
+    this.player2 = new Player(2);
     this.currentPlayer = "player1"
     this.deck = [];
     this.currentDeck = [];
@@ -61,7 +61,7 @@ class Game {
       './assets/red-jack.png',
       './assets/red-king.png',
       './assets/red-queen.png'
-    ]
+    ];
   }
   shuffle(cards, length) {
     var randomNumbers = [];
@@ -78,7 +78,7 @@ class Game {
         tempDeck.push(cards[randomNumbers[i]]);
         this.player1.hand = tempDeck;
       } else {
-        tempDeck.push(cards[randomNumbers[i]])
+        tempDeck.push(cards[randomNumbers[i]]);
         this.player2.hand = tempDeck;
       }
     }
@@ -94,10 +94,13 @@ class Game {
     this.deck = [];
   }
   slap() {
-    var slappedCard = this.deck[0];
-    var currentCardDashSplit = slappedCard.split("-");
-    var currentCardPeriodSplit = currentCardDashSplit[1].split(".");
-    if(this.deck.length > 1) {
+    this.declareWinner()
+    if(this.deck.length > 0) {
+      var slappedCard = this.deck[0];
+      var currentCardDashSplit = slappedCard.split("-");
+      var currentCardPeriodSplit = currentCardDashSplit[1].split(".");
+    }
+    if(this.deck.length > 1){
       var previousCard = this.deck[1];
       var previousCardDashSplit = previousCard.split("-");
       var previousCardPeroidSplit = previousCardDashSplit[1].split(".")
@@ -105,104 +108,129 @@ class Game {
     if(this.deck.length > 2) {
       var thirdCard = this.deck[2];
       var thirdCardDashSplit = thirdCard.split("-");
-      var thirdCardPeriodSplit = thirdCardDashSplit[1].split(".")
+      var thirdCardPeriodSplit = thirdCardDashSplit[1].split(".");
     }
-    if(currentCardDashSplit[1] === "jack.png" && event.key === "f" && this.player2.hand.length){
+    if(this.deck.length && currentCardDashSplit[1] === "jack.png" && event.key === "f" && this.player2.hand.length){
       for(var i = 0; i < this.deck.length; i++){
-        this.player1.hand.push(this.deck[i])
+        this.player1.hand.push(this.deck[i]);
       }
       this.slapType = "slapJack";
-      this.slapper = "Player 1"
-      this.currentDeck = this.deck;
+      this.slapper = "Player 1";
       this.deck = [];
       this.deckType = "player1Deck";
       this.shuffle(this.player1.hand, this.player1.hand.length);
-    } else if(currentCardDashSplit[1] === "jack.png" && event.key === "j" && this.player1.hand.length) {
+    } else if(this.deck.length && currentCardDashSplit[1] === "jack.png" && event.key === "j" && this.player1.hand.length) {
       for(var i = 0; i < this.deck.length; i++){
-        this.player2.hand.push(this.deck[i])
+        this.player2.hand.push(this.deck[i]);
       }
       this.slapType = "slapJack";
-      this.slapper = "Player 2"
-      this.currentDeck = this.deck;
+      this.slapper = "Player 2";
       this.deck = [];
       this.deckType = "player2Deck";
-      this.shuffle(this.player2.hand, this.player2.hand.length)
-    } else if(game.deck.length > 1 && previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "f" && this.player1.hand.length && this.player2.hand.length) {
+      this.shuffle(this.player2.hand, this.player2.hand.length);
+    } else if(this.deck.length && game.deck.length > 1 && previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "f" && this.player1.hand.length && this.player2.hand.length) {
       for(var i = 0; i < this.deck.length; i++){
-        this.player1.hand.push(this.deck[i])
+        this.player1.hand.push(this.deck[i]);
       }
       this.slapType = "double";
-      this.slapper = "Player 1"
-      this.currentDeck = this.deck;
+      this.slapper = "Player 1";
       this.deck = [];
       this.deckType = "player1Deck";
-      this.shuffle(this.player1.hand, this.player1.hand.length)
-    } else if(game.deck.length > 1 && previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "j" && this.player1.hand.length && this.player2.hand.length){
+      this.shuffle(this.player1.hand, this.player1.hand.length);
+    } else if(this.deck.length && game.deck.length > 1 && previousCardPeroidSplit[0] === currentCardPeriodSplit[0] && event.key === "j" && this.player1.hand.length && this.player2.hand.length){
       for(var i = 0; i < this.deck.length; i++){
-        this.player2.hand.push(this.deck[i])
+        this.player2.hand.push(this.deck[i]);
       }
       this.slapType = "double";
-      this.slapper = "Player 2"
-      this.currentDeck = this.deck;
+      this.slapper = "Player 2";
       this.deck = [];
       this.deckType = "player2Deck";
-      this.shuffle(this.player2.hand, this.player2.hand.length)
-    } else if (game.deck.length > 2 && currentCardPeriodSplit[0] === thirdCardPeriodSplit[0] && event.key === "f" && this.player1.hand.length && this.player2.hand.length){
+      this.shuffle(this.player2.hand, this.player2.hand.length);
+    } else if (this.deck.length && game.deck.length > 2 && currentCardPeriodSplit[0] === thirdCardPeriodSplit[0] && event.key === "f" && this.player1.hand.length && this.player2.hand.length){
       for(var i = 0; i < this.deck.length; i++){
-        this.player1.hand.push(this.deck[i])
+        this.player1.hand.push(this.deck[i]);
       }
       this.slapType = "sandwich";
-      this.slapper = "Player 1"
-      this.currentDeck = this.deck;
+      this.slapper = "Player 1";
       this.deck = [];
       this.deckType = "player1Deck";
-      this.shuffle(this.player1.hand, this.player1.hand.length)
-    } else if (game.deck.length > 2 &&currentCardPeriodSplit[0] === thirdCardPeriodSplit[0] && event.key === "j" && this.player1.hand.length && this.player2.hand.length) {
+      this.shuffle(this.player1.hand, this.player1.hand.length);
+    } else if (this.deck.length && game.deck.length > 2 && currentCardPeriodSplit[0] === thirdCardPeriodSplit[0] && event.key === "j" && this.player1.hand.length && this.player2.hand.length) {
       for(var i = 0; i < this.deck.length; i++){
-        this.player2.hand.push(this.deck[i])
+        this.player2.hand.push(this.deck[i]);
       }
       this.slapType = "sandwich";
-      this.slapper = "Player 2"
-      this.currentDeck = this.deck;
+      this.slapper = "Player 2";
       this.deck = [];
       this.deckType = "player2Deck";
-      this.shuffle(this.player2.hand, this.player2.hand.length)
-    }
-    else if (event.key === "f" && this.player2.hand.length) {
+      this.shuffle(this.player2.hand, this.player2.hand.length);
+    } else if (this.deck.length && event.key === "f") {
       this.slapType = "badSlap";
       this.slapper = "Player 1";
-      var forfietCard = this.player1.hand.shift()
-      this.player2.hand.push(forfietCard)
-    } else if (event.key === "j" && this.player1.hand.length) {
+      var forfietCard = this.player1.hand.shift();
+      this.player2.hand.push(forfietCard);
+    } else if (this.deck.length && event.key === "j") {
       this.slapType = "badSlap";
-      this.slapper = "Player 2"
-      var forfietCard = this.player2.hand.shift()
-      this.player1.hand.push(forfietCard)
+      this.slapper = "Player 2";
+      var forfietCard = this.player2.hand.shift();
+      this.player1.hand.push(forfietCard);
+    } else {
+      return;
     }
   }
-  resetTheDeck() {
-    var slappedCard = this.currentDeck[0];
+  declareWinner() {
+    var slappedCard = this.deck[0];
     var cardType = slappedCard.split("-");
     if(!this.player1.hand.length && event.key === "j" && cardType[1] === "jack.png") {
-      console.log("here")
       for(var i = 0; i < this.player2.hand.length; i++){
         this.deck.push(this.player2.hand[i]);
       }
       this.player2.hand = [];
       this.player2.wins+=1;
       this.deckType = "centerDeck";
+      this.slapType = "winner";
+      this.slapper = "Player 2";
       playerOneDeck.classList.remove("hidden");
+      this.player2.saveWinsToStorage();
       this.shuffle(this.deck, this.deck.length);
       this.deal();
     } else if (!this.player2.hand.length && event.key === "f" && cardType[1] === "jack.png") {
-      console.log("here");
       for(var i = 0; i < this.player1.hand.length; i++) {
         this.deck.push(this.player1.hand[i]);
       }
       this.player1.hand = [];
       this.player1.wins+=1;
       this.deckType = "centerDeck";
+      this.slapType = "winner";
+      this.slapper = "Player 1";
       playerTwoDeck.classList.remove("hidden");
+      this.player1.saveWinsToStorage();
+      this.shuffle(this.deck, this.deck.length);
+      this.deal();
+    } else if (!this.player2.hand.length && event.key === "j" && cardType[1] !== "jack.png"){
+      for(var i = 0; i < this.player1.hand.length; i++) {
+        this.deck.push(this.player1.hand[i]);
+      }
+      this.player1.hand = [];
+      this.player1.wins+=1;
+      this.deckType = "centerDeck";
+      this.slapType = "badSlapLoser";
+      this.slapper = "Player 1";
+      playerTwoDeck.classList.remove("hidden");
+      this.player1.saveWinsToStorage();
+      this.shuffle(this.deck, this.deck.length);
+      this.deal();
+    } else if (!this.player1.hand.length && event.key === "f" && cardType[1] !== "jack.png") {
+      for(var i = 0; i < this.player2.hand.length; i++){
+        this.deck.push(this.player2.hand[i]);
+      }
+      this.player2.hand = [];
+      this.player2.wins+=1;
+      this.deckType = "centerDeck";
+      this.slapType = "badSlapLoser";
+      this.slapper = "Player 2";
+      playerOneDeck.classList.remove("hidden");
+      this.player2.saveWinsToStorage();
       this.shuffle(this.deck, this.deck.length);
       this.deal();
     }
